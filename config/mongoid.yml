@@ -68,13 +68,10 @@ test:
         consistency: :strong
 
 production:
-  uri: <%= ENV['MONGOLAB_URI'] %>
-
-# production:
-#   sessions:
-#     default:
-#       hosts:
-#         - <%= ENV['MONGOLAB_URI'] %>
-#       database: <%= ENV['MONGOLAB_DB'] %>
-#       username: <%= ENV['MONGOLAB_USER'] %>
-#       password: <%= ENV['MONGOLAB_PASS'] %>
+  sessions:
+    default:
+      hosts:
+        - <%= ENV['MONGOLAB_URI'] %>
+      database: <%= ENV['MONGOLAB_DB'] %>
+      username: <%= ENV['MONGOLAB_USER'] %>
+      password: <%= ENV['MONGOLAB_PASS'] %>
