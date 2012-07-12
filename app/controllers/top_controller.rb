@@ -6,7 +6,7 @@ class TopController < ApplicationController
   #-------#
   def index
     Tweet.get_tweet( current_user ) unless session[:user_id].blank?
-    print "[ Tweet.count ] : " ; p Tweet.count ;
+#    print "[ Tweet.count ] : " ; p Tweet.count ;
     @tweets = Tweet.all
 #    @tweets = (Tweet.count > 0) ? Tweet.all : nil
     print "[ Tweet.class.name ] : " ; p Tweet.class.name ;
