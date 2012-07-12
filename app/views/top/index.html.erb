@@ -3,6 +3,7 @@
 
 <br />
 
+<% unless @tweets.blank? %>
 <% @tweets.each.with_index{ |tweet, index| %>
   <%= index %>
   | <%= link_to_unless( tweet.screen_name.blank?, image_tag( tweet.profile_image_url, size: "20x20" ), "https://twitter.com/#!/#{tweet.screen_name}", target: "_blank" ) %>
@@ -12,5 +13,6 @@
   | <%= tweet.tweet_at.blank? ? "" : tweet.tweet_at.strftime("%Y/%m/%d %H:%M:%S") %>
   <br />
 <% } %>
+<% end %>
 
 <br />
