@@ -7,6 +7,7 @@ class TopController < ApplicationController
   def index
     Tweet.get_tweet( current_user ) unless session[:user_id].blank?
     @tweets = Tweet.all
+    print "[ @tweets ] : " ; p @tweets ;
   end
 
 end
