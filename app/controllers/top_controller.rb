@@ -29,9 +29,11 @@ class TopController < ApplicationController
 #    @tweets = (Tweet.count > 0) ? Tweet.all : nil
 #    print "[ Tweet.class.name ] : " ; p Tweet.class.name ;
     # print "[ @tweets ] : " ; p @tweets ;
+    print "[ @tweets ] : " ; p @tweets ;
     @tweets = @tweets.to_a
     print "[ @tweets ] : " ; p @tweets ;
     print "[ @tweets.class.name ] : " ; p @tweets.class.name ;
+    print "[ nil.to_a ] : " ; p nil.to_a ;
   end
 
 end
