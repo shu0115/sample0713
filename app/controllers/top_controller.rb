@@ -12,8 +12,8 @@ class TopController < ApplicationController
     print "[ @tweets.class.name ] : " ; p @tweets.all.class.name ;
 #    print "[ @tweets.class.name ] : " ; p @tweets.length ;
 
-    @tweet = Tweet.all[0]
-    print "[ @tweet.class.name ] : " ; p @tweet.class.name ;
+    # @tweet = Tweet.all[0]
+    # print "[ @tweet.class.name ] : " ; p @tweet.class.name ;
 
     @tweets = Tweet.limit(10).all
     print "[ @tweets.class.name ] : " ; p @tweets.class.name ;
