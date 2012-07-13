@@ -23,20 +23,23 @@ class Tweet
     end
 
     EM.schedule do
+#    EM.run do
       client = TweetStream::Client.new
 
 #      client.track( 'ruby', 'rails' ) do |status|
       client.track( 'rails' ) do |status|
-        if status.user.lang == 'ja'
-          tweet = Tweet.create(
+          print "[ status ] : " ; status.tapp ;
+#        if status.user.lang == 'ja'
+#          tweet = Tweet.create(
+          Tweet.create(
             id_str:            status.id_str,
             screen_name:       status.user.screen_name,
             profile_image_url: status.user.profile_image_url,
             post:              status.text,
             tweet_at:          status.created_at,
           )
-          print "[ tweet ] : " ; p tweet ;
-        end
+#          print "[ tweet ] : " ; p tweet ;
+#        end
       end
     end
   end
