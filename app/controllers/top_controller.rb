@@ -24,7 +24,7 @@ class TopController < ApplicationController
     @tweets = @tweets.all
     print "[ @tweets.class.name ] : " ; p @tweets.class.name ;
 
-    @tweets = Tweet.all
+    @tweets = Tweet.order_by( tweet_at: :desc ).all
     print "[ @tweets.class.name ] : " ; p @tweets.class.name ;
 
 #    @tweets = (Tweet.count > 0) ? Tweet.all : nil
