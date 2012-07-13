@@ -22,8 +22,8 @@ class Tweet
       config.parser             = :json_pure
     end
 
-    EM.schedule do
-#    EM.run do
+#    EM.schedule do
+    EM.run do
       client = TweetStream::Client.new
 
 #      client.track( 'ruby', 'rails' ) do |status|
