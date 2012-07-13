@@ -9,10 +9,6 @@ ja:
     top: Top
     list: List
 
-  mongoid:
-    inspection:
-      criteria: "Inspection Criteria"
-
   date:
     abbr_day_names:
     - 日
