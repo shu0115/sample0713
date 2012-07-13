@@ -28,8 +28,9 @@ class Tweet
 
 #      client.track( 'ruby', 'rails' ) do |status|
       client.track( 'rails' ) do |status|
-          print "[ status ] : " ; status.tapp ;
-#        if status.user.lang == 'ja'
+#          print "[ status ] : " ; status.tapp ;
+          print "[ status.user.lang ] : " ; status.user.lang.tapp ;
+        if status.user.lang == 'ja'
 #          tweet = Tweet.create(
           Tweet.create(
             id_str:            status.id_str,
@@ -39,7 +40,7 @@ class Tweet
             tweet_at:          status.created_at,
           )
 #          print "[ tweet ] : " ; p tweet ;
-#        end
+        end
       end
     end
   end
