@@ -8,7 +8,7 @@ Count : <%= @count %><br />
 <br />
 
 <table>
-<% @tweets.each.with_index{ |tweet, index| %>
+<% @tweets.each.with_index(1){ |tweet, index| %>
   <tr>
     <td><%= index %></td>
     <td><%= link_to_unless( tweet.screen_name.blank?, image_tag( tweet.profile_image_url, size: "20x20" ), "https://twitter.com/#!/#{tweet.screen_name}", target: "_blank" ) %></td>
