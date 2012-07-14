@@ -43,6 +43,8 @@ class Tweet
         end
       end
     end
+  rescue => ex
+    print "[ ex ] : " ; p ex ;
   end
 
 end

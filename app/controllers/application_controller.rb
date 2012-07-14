@@ -54,7 +54,7 @@ class ApplicationController < ActionController::Base
   #------------------------#
   # heroku_periodic_access #
   #------------------------#
-  # Heroku用延命処置
+  # Heroku定期アクセス
   $timer_arry = Array.new
 
   def heroku_periodic_access
