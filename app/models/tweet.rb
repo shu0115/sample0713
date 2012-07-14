@@ -22,7 +22,6 @@ class Tweet
       config.parser             = :json_pure
     end
 
-#    EM.schedule do
     EM.run do
       client = TweetStream::Client.new
 
@@ -31,6 +30,7 @@ class Tweet
 #          print "[ status ] : " ; status.tapp ;
           print "[ status.user.lang ] : " ; status.user.lang.tapp ;
         if status.user.lang == 'ja'
+          print "[ status.text ] : " ; p status.text ;
 #          tweet = Tweet.create(
           Tweet.create(
             id_str:            status.id_str,
