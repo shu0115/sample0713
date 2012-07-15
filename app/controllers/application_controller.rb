@@ -12,8 +12,8 @@ class ApplicationController < ActionController::Base
   # セッション有効期限延長
   before_filter :reset_session_expires
 
-  # Heroku用延命処置
-  before_filter :heroku_periodic_access
+  # Heroku用定期アクセス
+  before_filter :heroku_periodic_access if Rails.env.production?
 
   private
 
@@ -54,7 +54,7 @@ class ApplicationController < ActionController::Base
   #------------------------#
   # heroku_periodic_access #
   #------------------------#
-  # Heroku定期アクセス
+  # Heroku用定期アクセス
   $timer_arry = Array.new
 
   def heroku_periodic_access
@@ -71,7 +71,15 @@ class ApplicationController < ActionController::Base
     EM.run do
       # 1分周期
       result = EM.add_periodic_timer(60) do
-        puts "[ #{Time.now.strftime("%Y/%m/%d %H:%M:%S")} Lengthen... ]"
+        puts "[ ----- #{Time.now.strftime("%Y/%m/%d %H:%M:%S")} Lengthen... ----- ]"
+        parsed_url = URI.parse( url_for(:root) )
+        http = Net::HTTP.new( parsed_url.host, parsed_url.port )
+        http.use_ssl = true
+        http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+        request = Net::HTTP::Get.new( parsed_url.request_uri )
+        response = http.request( request )
+        print "[ response ] : " ; p response ;
+        puts "[ ------------------------------------------- ]"
       end
 
       # タイマー保管
