@@ -12,10 +12,6 @@ class ApplicationController < ActionController::Base
   # セッション有効期限延長
   before_filter :reset_session_expires
 
-  # Heroku用定期アクセス
-#  before_filter :heroku_periodic_access if Rails.env.production?
-  before_filter :heroku_periodic_access
-
   private
 
   #--------------#
@@ -50,48 +46,6 @@ class ApplicationController < ActionController::Base
   # セッション期限延長
   def reset_session_expires
     request.session_options[:expire_after] = 2.weeks
-  end
-
-  #------------------------#
-  # heroku_periodic_access #
-  #------------------------#
-  # Heroku用定期アクセス
-  $timer_arry = Array.new
-
-  def heroku_periodic_access
-    $timer_arry.each{ |timer|
-      # タイマーキャンセル
-      result = timer.cancel
-
-      # タイマー削除
-      if result == true
-        $timer_arry.delete( timer )
-      end
-    }
-
-    EM.run do
-      # 1分周期
-      result = EM.add_periodic_timer(10) do
-        puts "[ ----- #{Time.now.strftime("%Y/%m/%d %H:%M:%S")} Lengthen... ----- ]"
-#        url = "https://sample0713.herokuapp.com/"
-        url = "http://www.yahoo.co.jp/"
-#        parsed_url = URI.parse( url_for(:root) )
-        parsed_url = URI.parse( url )
-        http = Net::HTTP.new( parsed_url.host, parsed_url.port )
-        print "[ url.index ] : " ; p url.index("https:") ;
-        if url.index("https:") == 0
-          http.use_ssl = true
-          http.verify_mode = OpenSSL::SSL::VERIFY_NONE
-        end
-        request = Net::HTTP::Get.new( parsed_url.request_uri )
-        response = http.request( request )
-        print "[ response ] : " ; p response ;
-        puts "[ ------------------------------------------- ]"
-      end
-
-      # タイマー保管
-      $timer_arry.push( result )
-    end
   end
 
   #--------------#

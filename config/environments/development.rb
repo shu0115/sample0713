@@ -37,5 +37,5 @@ Sample0713::Application.configure do
   config.assets.debug = false
 
   # For LogRotate
-  config.logger = Logger.new( config.paths.log.first, 5, 1*1024*1024 )  # 1MB * 5
+  config.logger = Logger.new( 'log/development.log', 5, 1*1024*1024 )  # 1MB * 5
 end
