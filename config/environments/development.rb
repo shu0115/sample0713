@@ -35,4 +35,7 @@ Sample0713::Application.configure do
   # Expands the lines which load the assets
   # config.assets.debug = true
   config.assets.debug = false
+
+  # For LogRotate
+  config.logger = Logger.new( config.paths.log.first, 5, 1*1024*1024 )  # 1MB * 5
 end

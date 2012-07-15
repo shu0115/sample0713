@@ -13,7 +13,8 @@ class ApplicationController < ActionController::Base
   before_filter :reset_session_expires
 
   # Heroku用定期アクセス
-  before_filter :heroku_periodic_access if Rails.env.production?
+#  before_filter :heroku_periodic_access if Rails.env.production?
+  before_filter :heroku_periodic_access
 
   private
 
@@ -70,12 +71,18 @@ class ApplicationController < ActionController::Base
 
     EM.run do
       # 1分周期
-      result = EM.add_periodic_timer(60) do
+      result = EM.add_periodic_timer(10) do
         puts "[ ----- #{Time.now.strftime("%Y/%m/%d %H:%M:%S")} Lengthen... ----- ]"
-        parsed_url = URI.parse( url_for(:root) )
+#        url = "https://sample0713.herokuapp.com/"
+        url = "http://www.yahoo.co.jp/"
+#        parsed_url = URI.parse( url_for(:root) )
+        parsed_url = URI.parse( url )
         http = Net::HTTP.new( parsed_url.host, parsed_url.port )
-        http.use_ssl = true
-        http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+        print "[ url.index ] : " ; p url.index("https:") ;
+        if url.index("https:") == 0
+          http.use_ssl = true
+          http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+        end
         request = Net::HTTP::Get.new( parsed_url.request_uri )
         response = http.request( request )
         print "[ response ] : " ; p response ;
